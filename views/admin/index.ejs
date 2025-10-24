@@ -1,40 +1,382 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add Product</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JasCart - Product List</title>
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-bottom: 3px solid #667eea;
+        }
+
+        header img {
+            max-height: 50px;
+            width: auto;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 1;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .navbar a:last-child {
+            border-right: none;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-top: 12px;
+            padding-bottom: 16px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 35px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            list-style: none;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.25);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-card h2 {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .product-price {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .edit-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .delete-btn {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .delete-btn:hover {
+            background: #fca5a5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state h2 {
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .add-product-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 20px;
+            }
+
+            header img {
+                max-height: 45px;
+            }
+
+            .navbar a {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                flex: 1;
+            }
+
+            .main-content {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .product-image {
+                height: 180px;
+            }
+
+            .product-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 12px 16px;
+            }
+
+            .navbar a:last-child {
+                border-bottom: none;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .product-card {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .product-image {
+                width: 120px;
+                height: 120px;
+                flex-shrink: 0;
+            }
+
+            .product-content {
+                padding: 12px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .edit-btn,
+            .delete-btn {
+                width: 100%;
+            }
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 80px 20px;
+            color: #6b7280;
+        }
+
+        .no-products h2 {
+            color: #1f2937;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+        <img src="/images/log.jpg" alt="JasCart logo">
     </header>
-    <div class="navbar"> 
-        <a href="/users">Customer</a>
 
-        <a href="/admin/products">Products</a>
-        <a href="/admin/add">Add Product</a>
-        <a href="/order">Orders</a>
-        <a href="/">LogOut</a>
-    </div>
-    <div class="container">
-        <h1>Product List</h1>
-        <ul>
-            <% products.forEach(product=> { %>
-                <li>
-                    <h2>
-                        <%= product.title %>
-                    </h2>
-                    <p>
-                        <%= product.description %>
-                    </p>
-                    <p>Price: $<%= product.price %>
-                    </p>
-                    <img width="300px" height="300px" src="<%= product.image %>" alt="<%= product.title %>">
-                </li>
-                <% }) %>
-        </ul>
+    <nav class="navbar">
+        <a href="/admin/products">📦 Products</a>
+        <a href="/admin/add-product">➕ Add Product</a>
+        <a href="/users">👥 Customer</a>
+        <a href="/">🚪 LogOut</a>
+    </nav>
+
+    <div class="main-content">
+        <h1>Product Catalog</h1>
+
+        <% if (products && products.length > 0) { %>
+            <ul class="products-grid">
+                <% products.forEach(product => { %>
+                    <li class="product-card">
+                        <img src="<%= product.image %>" alt="<%= product.title %>" class="product-image">
+                        <div class="product-content">
+                            <h2><%= product.title %></h2>
+                            <p class="product-description"><%= product.description %></p>
+                            <div class="product-footer">
+                                <span class="product-price">$<%= product.price %></span>
+                                <div class="action-buttons">
+                                    <a href="/admin/edit/<%= product.id %>" class="edit-btn">✏️ Edit</a>
+                                    <a href="/admin/delete/<%= product.id %>" class="delete-btn" onclick="return confirm('Delete this product?')">🗑️ Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <div class="no-products">
+                <h2>No Products Found</h2>
+                <p>Start by adding your first product to the catalog.</p>
+                <a href="/admin/add-product" class="add-product-btn">Add Your First Product</a>
+            </div>
+        <% } %>
     </div>
 </body>
-
 </html>
