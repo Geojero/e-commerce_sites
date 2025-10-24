@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User - Cart</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <style>
+        /* Define CSS for the modal */
+        .modal {
+            border-radius: 5px;
+            display: none;
+            /* Hide the modal by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Define CSS for the modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+    </header>
+    <div class="navbar">
+        <a href="/user">Home</a>
+        <a href="/cart"> Cart</a>
+        <a href="/order-user">Order</a>
+
+        <a href="/">LogOut</a>
+    </div>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <% if (carts.length===0) { %>
+            <p>Your cart is empty.</p>
+            <% } else { %>
+                <ul>
+                    <% var totalPrice=0; %>
+                        <% carts.forEach(item=> { %>
+                            <li>
+                                <h2>
+                                    <%= item.title %>
+                                </h2>
+                                <p>
+                                    <%= item.description %>
+                                </p>
+                                <p>Price: $<%= item.price %>
+                                </p>
+                                <img width="100px" height="100px" src="<%= item.image %>" alt="<%= item.title %>">
+                                <% totalPrice +=item.price; %>
+                            </li>
+                            <% }) %>
+                </ul>
+                <p>Total Price: $<%= totalPrice.toFixed(2) %>
+                </p> <!-- Display total price -->
+                <!-- Button to open the modal -->
+                <button id="checkoutBtn">Proceed to Checkout</button>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <form action="/checkout" method="POST">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                            <label for="address">Address:</label>
+                            <textarea id="address" name="address" required></textarea>
+                            <label for="payment">Payment Method:</label>
+                            <input type="checkbox" id="payment" name="paymentMethod" value="Cash on Delivery">
+                            <label for="payment">Cash on Delivery</label>
+                            <button id="submit" type="submit">Checkout</button>
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+    </div>
+
+    <script>
+
+        const submitButton = document.getElementById('submit');
+
+        // Add event listener for the click event on the submit button
+        submitButton.addEventListener('click', function (event) {
+            // Prevent the default form submission behavior
+
+
+            // Show the alert message
+            alert('your order placed sucessfully....');
+
+            // Optionally, you can submit the form programmatically after showing the alert
+            // document.getElementById('checkoutForm').submit();
+        });
+
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("checkoutBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

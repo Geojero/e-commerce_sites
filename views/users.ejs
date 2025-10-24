@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin - Product List</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+
+</head>
+
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+
+    </header>
+    <div class="navbar">
+        <a href="/users">Customer</a>
+        <a href="/admin/products">Products</a>
+        <a href="/admin/add-product">Add Product</a>
+        <a href="/order">Orders</a>
+        
+        <a href="/">LogOut</a>
+    </div>
+    <h2>User Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

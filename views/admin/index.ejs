@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+</head>
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+    </header>
+    <div class="navbar"> 
+        <a href="/users">Customer</a>
+
+        <a href="/admin/products">Products</a>
+        <a href="/admin/add">Add Product</a>
+        <a href="/order">Orders</a>
+        <a href="/">LogOut</a>
+    </div>
+    <div class="container">
+        <h1>Product List</h1>
+        <ul>
+            <% products.forEach(product=> { %>
+                <li>
+                    <h2>
+                        <%= product.title %>
+                    </h2>
+                    <p>
+                        <%= product.description %>
+                    </p>
+                    <p>Price: $<%= product.price %>
+                    </p>
+                    <img width="300px" height="300px" src="<%= product.image %>" alt="<%= product.title %>">
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+</body>
+
+</html>

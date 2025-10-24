@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User - Cart</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+</head>
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+    </header>
+    <div class="navbar">
+        <a href="/user">Home</a>
+        <a href="/cart"> Cart</a>
+        <a href="/order-user">Order</a>
+      
+        <a href="/">LogOut</a>
+    </div>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <% if (carts.length === 0) { %>
+            <p>Your cart is empty.</p>
+        <% } else { %>
+            <ul>
+                <% var totalPrice = 0; %>
+                <% carts.forEach(item => { %>
+                    <li>
+                        <h2><%= item.title %></h2>
+                        <p><%= item.description %></p>
+                        <p>Price: $<%= item.price %></p>
+                        <img width="100px" height="100px" src="<%= item.image %>" alt="<%= item.title %>">
+                        <% totalPrice += item.price; %> <!-- Add item price to total price -->
+                    </li>
+                <% }) %>
+            </ul>
+            <p>Total Price: $<%= totalPrice.toFixed(2) %></p> <!-- Display total price -->
+            <a href="/checkout"><button>Proceed to Checkout</button></a>
+        <% } %>
+    </div>
+</body>
+</html>

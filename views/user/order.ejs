@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+</head>
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+    </header>
+    <div class="navbar"> 
+        <a href="/admin/products">Products</a>
+        <a href="/admin/add">Add Product</a>
+        <a href="/order">Orders</a>
+        <a href="/">LogOut</a>
+    </div>
+    <h1>Orders</h1>
+    <% if (orders.length === 0) { %>
+        <p>No orders found.</p>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Customer Address</th>
+                    <th>Payment Method</th>
+                    <th>Total Price</th>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(order => { %>
+                    <tr>
+                        <td><%= order.customerName %></td>
+                        <td><%= order.customerAddress %></td>
+                        <td><%= order.paymentMethod %></td>
+                        <td>$<%= order.totalPrice.toFixed(2) %></td>
+                        <td>
+                            <% order.items.forEach(item => { %>
+                                <%= item.title %><br> <!-- Display item title -->
+                            <% }) %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>
