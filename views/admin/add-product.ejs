@@ -1,40 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add Product</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JasCart - Add Product</title>
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-bottom: 3px solid #667eea;
+        }
+
+        header img {
+            max-height: 50px;
+            width: auto;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 1;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .navbar a:last-child {
+            border-right: none;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-top: 12px;
+            padding-bottom: 16px;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 45px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease-out;
+            margin-bottom: 30px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 44px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background-color: #f9fafb;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="number"]::placeholder,
+        textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .submit-btn {
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .back-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #10b981;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ef4444;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 20px;
+            }
+
+            header img {
+                max-height: 45px;
+            }
+
+            .navbar {
+                gap: 0;
+            }
+
+            .navbar a {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                flex: 1;
+            }
+
+            .main-content {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 12px 16px;
+            }
+
+            .navbar a:last-child {
+                border-bottom: none;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .back-btn,
+            .submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+        <img src="/images/log.jpg" alt="JasCart logo">
     </header>
-    <div class="navbar"> 
-        <a href="/users">Customer</a>
 
-        <a href="/admin/products">Products</a>
-        <a href="/admin/add">Add Product</a>
-        <a href="/order">Orders</a>
-        <a href="/">LogOut</a>
-    </div>
-    <div class="container">
-        <h1>Add a New Product</h1>
-        <div class="form-box">
+    <nav class="navbar">
+        <a href="/users">👥 Customer</a>
+        <a href="/admin/products">📦 Products</a>
+        <a href="/admin/add">➕ Add Product</a>
+        <a href="/order">📋 Orders</a>
+        <a href="/">🚪 LogOut</a>
+    </nav>
+
+    <div class="main-content">
+        <h1>Add New Product</h1>
+
+        <div class="form-container">
             <form action="/admin/add" method="post">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" required>
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required></textarea>
-                <label for="image">Image URL:</label>
-                <input type="text" id="image" name="image" required>
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category" required>
-                <button type="submit">Add Product</button>
+                <div class="form-group">
+                    <label for="title">Product Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter product name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" placeholder="0.00" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Enter detailed product description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image URL</label>
+                    <input type="text" id="image" name="image" placeholder="https://example.com/image.jpg" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" name="category" placeholder="Enter product category" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Add Product</button>
             </form>
         </div>
-        <a class="button" href="/admin/products">Back to Product List</a>
+
+        <div class="button-group">
+            <a class="back-btn" href="/admin/products">← Back to Products</a>
+        </div>
     </div>
 </body>
 </html>
