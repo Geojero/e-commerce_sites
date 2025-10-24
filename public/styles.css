@@ -1,0 +1,148 @@
+/* styles.css */
+
+/* styles.css */
+
+.login {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #c4bebe;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #383535;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+a {
+    color: #0099ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.admin-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #b1b1b1;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.admin-button:hover {
+    background-color: #333;
+}
+
+
+.navbar {
+
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    background-color: #000000;
+    height: 60px;
+}
+
+.navbar a {
+    padding: 14px 20px;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    align-items: center;
+    /* Center text vertically within the link */
+    justify-content: center;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.content {
+    padding: 20px;
+}
+/* Apply basic styling to the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* Border color for table */
+}
+
+/* Apply styling to table header */
+th {
+    background-color: #f2f2f2; /* Header background color */
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd; /* Border color for header */
+}
+
+/* Apply styling to table cells */
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd; /* Border color for cells */
+}
+
+/* Apply alternate background color to table rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+/* Apply hover effect to table rows */
+tr:hover {
+    background-color: #ddd; /* Hover row background color */
+}

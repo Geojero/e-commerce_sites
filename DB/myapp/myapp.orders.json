@@ -1,0 +1,122 @@
+[{
+  "_id": {
+    "$oid": "6661d92f50f39ac7c57e713b"
+  },
+  "customerName": "jeron",
+  "customerAddress": "west",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "$oid": "6661bbac40968d68e3a9f174"
+    },
+    {
+      "$oid": "6661cbba8a7c2437b898767a"
+    }
+  ],
+  "totalPrice": 61000,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661e5dbc0e0a3ec9e1dd74c"
+  },
+  "customerName": "jer",
+  "customerAddress": "de",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "_id": {
+        "$oid": "6661da6250f39ac7c57e7141"
+      },
+      "title": "Charger c-type"
+    },
+    {
+      "_id": {
+        "$oid": "6661e5ccc0e0a3ec9e1dd748"
+      },
+      "title": "Redmi note 11"
+    }
+  ],
+  "totalPrice": 13000,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661e813d8fc1329781fde56"
+  },
+  "customerName": "barath",
+  "customerAddress": "tuticorin",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "_id": {
+        "$oid": "6661e7dad8fc1329781fde52"
+      },
+      "title": "Redmi note 11"
+    }
+  ],
+  "totalPrice": 11000,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661e93acda407eb5d5f09c5"
+  },
+  "customerName": "suri",
+  "customerAddress": "theni",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "_id": {
+        "$oid": "6661e924cda407eb5d5f09c1"
+      },
+      "title": "Redmi note 11"
+    }
+  ],
+  "totalPrice": 11000,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661ea89d93566ea45f74f7b"
+  },
+  "customerName": "sunil",
+  "customerAddress": "nellai",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "_id": {
+        "$oid": "6661ea76d93566ea45f74f77"
+      },
+      "title": "Redmi note 11"
+    }
+  ],
+  "totalPrice": 11000,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661ebc91176ddfe03056e5d"
+  },
+  "items": [],
+  "totalPrice": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6661ed95a56e42c706bb4f07"
+  },
+  "customerName": "jeron",
+  "customerAddress": "tsy",
+  "paymentMethod": "Cash on Delivery",
+  "items": [
+    {
+      "_id": {
+        "$oid": "6661ed1b06fde06d3607d2e1"
+      },
+      "title": "Samsung s24 ultra"
+    }
+  ],
+  "totalPrice": 50000,
+  "__v": 0
+}]

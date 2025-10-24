@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User - Product List</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <script>
+        function addToCart(product) {
+            fetch('/cart/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img name="head" src="/images/log.jpg" alt="logo" class="header-image">
+    </header>
+    <div class="navbar">
+        <a href="/user">Home</a>
+        <a href="/cart"> Cart</a>
+        <a href="/order-user">Order</a>
+    
+        <a href="/">LogOut</a>
+    </div>
+    <div class="container">
+        <h1>Product List</h1>
+        <ul>
+            <% products.forEach(product => { %>
+                <li>
+                    <h2><%= product.title %></h2>
+                    <p><%= product.description %></p>
+                    <p>Price: $<%= product.price %></p>
+                    <img width="300px" height="300px" src="<%= product.image %>" alt="<%= product.title %>">
+                    <button onclick='addToCart(<%- JSON.stringify(product) %>)'>Add to Cart</button>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</body>
+</html>
